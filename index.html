@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://assets.ubuntu.com/v1/vanilla-framework-version-3.8.1.min.css" />
+    <link rel="stylesheet" href="style.css">
+    <title>Blog Posts</title>
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+</head>
+<body>
+
+    <div class="row" x-data="{ posts: [] }"  x-init="posts = await (await fetch('https://people.canonical.com/~anthonydillon/wp-json/wp/v2/posts.json')).json()">
+        <template x-for="post in posts">
+            <article class="col-4">
+                <div class="p-card--highlighted">
+                    <header>
+                        <p>Cloud and Server</p>
+                    </header>
+                    <main class="p-card__content"> 
+                        <img class="p-card__image" alt="" height="185" width="330" x-bind:src="post.featured_media">
+                        <a x-bind:href="post._links.self[0].href">
+                            <h1 x-text="post.title.rendered"></h1>
+                        </a>
+                        <p class="p-heading--6" >By <a x-bind:href="post._embedded.author[0].link" x-text="post._embedded.author[0].name"></a> on <span x-text="convertDate(post.date)"></span></p>
+                    </main>
+          
+                    <footer>
+                        <p>Article</p>
+                    </footer>
+                </div>
+            </article>
+        </template>   
+    </div>
+    
+</body>
+</html>
+
+<script>
+  const convertDate = (dateString) => {
+    const myDate = new Date(Date.parse(dateString));
+    const month = myDate.toLocaleString('en-US', { month: 'long' });
+    return `${myDate.getDate()} ${month} ${myDate.getFullYear()}`;
+  }
+</script>
