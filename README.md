@@ -8,7 +8,7 @@
 * To fetch the JSON, the plain JS fetch function was used
 * To make life a bit easier (and because I wanted to learn something new), I used AlpineJS to render the fetched data.
 
-## Questions
+## Decisions
 * I tried to make the design of the posts similar to the given Screenshot.
 * Nonetheless, the given link colors do not fit 100% to the guidelines given by Canonical. 
 * E.g. the link color on the picture is a little bit to bright, I decided to stick with the default color given by the framework and the palette. 
